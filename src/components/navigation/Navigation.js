@@ -1,23 +1,34 @@
 //import Link from react-dom-router
-import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 function Navigation(props) {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/clock">Clock</Link>
-      </li>
-      <li>
-        <Link to="/contact">Contact</Link>
-      </li>
-      <li>
-        <Link to="/jeopardy">Jeopardy</Link>
-      </li>
-    </ul>
-  );
+    return (
+        <Navbar bg="dark" data-bs-theme="dark">
+            <Container>
+                <Navbar.Brand>Our Awesome React App</Navbar.Brand>
+                <Nav className="me-auto">
+                    <LinkContainer to="/">
+                        <Nav.Link>Home</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/clock">
+                        <Nav.Link>Clock</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/contact">
+                        <Nav.Link>Contact</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/jeopardy">
+                        <Nav.Link>Jeopardy</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/users">
+                        <Nav.Link>Users</Nav.Link>
+                    </LinkContainer>
+                </Nav>
+            </Container>
+        </Navbar>
+    );
 }
 
 export default Navigation;

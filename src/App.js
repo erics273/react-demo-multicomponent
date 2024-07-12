@@ -4,6 +4,7 @@ import Contact from "./components/contact/Contact";
 import Jeopardy from "./components/jeopardy/Jeopardy";
 import Navigation from "./components/navigation/Navigation";
 import NoMatch from "./components/noMatch/NoMatch";
+import Users from "./components/users/Users";
 import Welcome from "./components/welcome/Welcome";
 
 import { Routes, Route } from 'react-router-dom';
@@ -19,9 +20,9 @@ function App() {
         <Route path="/clock" element={<Clock />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/jeopardy" element={<Jeopardy />} />
+        <Route path="/users" element={<Users/>} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
-      <Jeopardy/>
     </div>
   );
 }
