@@ -21,6 +21,7 @@ function App() {
         <Route path="/jeopardy" element={<Jeopardy />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
+      <Jeopardy/>
     </div>
   );
 }

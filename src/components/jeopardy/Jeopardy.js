@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import JeopardyDisplay from "../jeopardyDisplay/JeopardyDisplay";
 
 function Jeopardy(props) {
 
   let [score, setScore] = useState(0);
-  let [jeopardyData, setJeopardyData] = useState({});
+  let [jeopardyData, setJeopardyData] = useState({
+    category: {}
+  });
+
+  let userAnswer = useRef()
 
   //when the component mounts, get a the first question
   useEffect(()=> {
     getNewQuestion();
-  },[])
+  },[score])
 
   //get a new random question from the API and add it to the data object in state
   let getNewQuestion = () => {
+    
     //use fetch to make an API call and get a random Jeopardy question (returns a promise)
     fetch(`https://jservice.xyz/api/random-clue`)
         //on success of the fetch request, turn the response that came back into JSON
@@ -28,16 +34,35 @@ function Jeopardy(props) {
         //handle any errors/failures with getting data from the API
         .catch((error) => {
             console.log(error)
-        });
+        })
+  }
+
+  let checkAnswer = () => {
+
+    //checking the asnwer provided agains the answer from the API
+    if(userAnswer.current.value.toLowerCase() === jeopardyData.answer.toLowerCase()){
+        //correct? add to the score
+        setScore(score + jeopardyData.value)
+    }else{
+        //wrong: subtract from the score
+        setScore(score - jeopardyData.value)
+    }
+
+    //clear out the input field
+    userAnswer.current.value = "";
+
   }
 
     //present the results to the user
     return (
       <div>
-        {/* Displaying the question to help you get started */}
-        <div>Question: {jeopardyData.question}</div>
-        <div>Value: {jeopardyData.value}</div>
-      </div>
+        <JeopardyDisplay 
+            jeopardyData={jeopardyData} 
+            score={score} 
+            userAnswer={userAnswer}
+            checkAnswer={checkAnswer}
+        />
+    </div>
     );
 }
 
